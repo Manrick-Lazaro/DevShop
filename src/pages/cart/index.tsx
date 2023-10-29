@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import type { cartProps } from "../../context/cartContext";
 
 export default function Cart(): JSX.Element {
-	const { cart } = useContext(CartContext);
+	const { cart, total, addItemCart, removeItemCart } =
+		useContext(CartContext);
 
 	return (
 		<div className="w-full max-w-7xl mx-4 mx-auto">
@@ -40,26 +41,33 @@ export default function Cart(): JSX.Element {
 					<strong>Preço: {item.price}</strong>
 
 					<div className="flex items-center justify-center gap-3">
-						<button className="bg-slate-600 rounded text-white font-medium flex items-center justify-center px-2">
+						<button
+							onClick={() => removeItemCart(item)}
+							className="bg-slate-600 rounded text-white font-medium flex items-center justify-center px-2"
+						>
 							-
 						</button>
 						{item.amount}
-						<button className="bg-slate-600 rounded text-white font-medium flex items-center justify-center px-2">
+						<button
+							onClick={() => addItemCart(item)}
+							className="bg-slate-600 rounded text-white font-medium flex items-center justify-center px-2"
+						>
 							+
 						</button>
 					</div>
 
 					<strong className="float-right">
-						SubTotal: {item.total.toLocaleString("pt-BR", {
+						SubTotal:{" "}
+						{item.total.toLocaleString("pt-BR", {
 							style: "currency",
-							currency: "BRL"
+							currency: "BRL",
 						})}
 					</strong>
 				</section>
 			))}
 
 			{cart.length !== 0 && (
-				<p className="font-bold mt-4 float-right">Total: R$1.000</p>
+				<p className="font-bold mt-4 float-right">Total: {total}</p>
 			)}
 		</div>
 	);

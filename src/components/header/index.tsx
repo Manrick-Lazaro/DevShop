@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { CartContext } from "../../context/cartContext";
 
 export default function Header(): JSX.Element {
-	const { amount } = useContext(CartContext);
+	const { cartAmount } = useContext(CartContext);
 
 	return (
 		<header className="w-full px-1 bg-slate-200">
@@ -24,9 +24,9 @@ export default function Header(): JSX.Element {
 						size={24}
 						color="#121212"
 					/>
-					{amount > 0 && (
+					{cartAmount > 0 && (
 						<span className="absolute px-2.5 bg-sky-500 rounded-full w-6 h-6 flex items-center justify-center text-white text-xs -right-4 -top-2">
-							{amount}
+							{cartAmount}
 						</span>
 					)}
 				</Link>
